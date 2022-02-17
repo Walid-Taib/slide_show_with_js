@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Slide Show with Cross Fade</title>
+
+    <link href="styles.css" rel="stylesheet">
+  
+
+</head>
+
+<body>
+
+    <div id="content">
+        <img src="slides/image1.jpg" alt="slideshow image" id="myimage">
+    </div>
+
+    <p id="links"><a href="#" id="previous">previous</a><a href="#" id="next">next</a></p>
+
+</body>
+<script>
+    const imgs=['./slides/image1.jpg','./slides/image2.jpg','./slides/image3.jpg','./slides/image4.jpg','./slides/image5.jpg'];
+    const myContent=document.getElementById('content');
+    const previousButton=document.getElementById('previous');
+    const nextButton=document.querySelector('#next');
+    let currentImage=0;
+
+    let swap=()=>{
+        const myimgs=document.createElement('img');
+        myimgs.src=`${imgs[currentImage]}`;
+        myimgs.className='fadeinimg';
+        myContent.appendChild(myimgs);
+
+        if(myContent.children.length>2){
+            myContent.removeChild(myContent.children[0]);
+        }
+    }
+
+
+    nextButton.addEventListener('click',(event)=>{
+        event.preventDefault();
+        currentImage++;
+        if(currentImage>4) currentImage=0;
+        swap();
+
+    })
+
+    previousButton.addEventListener('click',(event)=>{
+        event.preventDefault();
+        currentImage--;
+        if(currentImage<0) currentImage=imgs.length-1;
+        swap();
+     })
+
+</script>
+
+</html>
